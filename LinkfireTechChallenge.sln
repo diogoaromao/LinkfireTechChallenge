@@ -1,0 +1,53 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LinkfireTechChallenge", "src\LinkfireTechChallenge\LinkfireTechChallenge.csproj", "{F0EAA66D-D235-4FC3-9644-F24F7AD400F5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LinkfireTechChallenge.Core", "src\LinkfireTechChallenge.Core\LinkfireTechChallenge.Core.csproj", "{5712FAA7-9E9A-45BA-841A-CEA6FF6FA099}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpotifyClient", "src\SpotifyClient\SpotifyClient.csproj", "{5A613FEF-38B2-4136-B832-49B8F02BA416}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpotifyClient.Core", "src\SpotifyClient.Core\SpotifyClient.Core.csproj", "{C9805A84-FD7F-4EBB-86F8-667C3FF3A9D4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2624272A-CEA2-41B5-945D-6A96516CDF0A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{227F0D55-2D6D-4C82-8CE9-6DF8233448EF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F0EAA66D-D235-4FC3-9644-F24F7AD400F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0EAA66D-D235-4FC3-9644-F24F7AD400F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0EAA66D-D235-4FC3-9644-F24F7AD400F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0EAA66D-D235-4FC3-9644-F24F7AD400F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5712FAA7-9E9A-45BA-841A-CEA6FF6FA099}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5712FAA7-9E9A-45BA-841A-CEA6FF6FA099}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5712FAA7-9E9A-45BA-841A-CEA6FF6FA099}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5712FAA7-9E9A-45BA-841A-CEA6FF6FA099}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A613FEF-38B2-4136-B832-49B8F02BA416}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A613FEF-38B2-4136-B832-49B8F02BA416}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A613FEF-38B2-4136-B832-49B8F02BA416}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A613FEF-38B2-4136-B832-49B8F02BA416}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9805A84-FD7F-4EBB-86F8-667C3FF3A9D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9805A84-FD7F-4EBB-86F8-667C3FF3A9D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9805A84-FD7F-4EBB-86F8-667C3FF3A9D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9805A84-FD7F-4EBB-86F8-667C3FF3A9D4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F0EAA66D-D235-4FC3-9644-F24F7AD400F5} = {2624272A-CEA2-41B5-945D-6A96516CDF0A}
+		{5712FAA7-9E9A-45BA-841A-CEA6FF6FA099} = {2624272A-CEA2-41B5-945D-6A96516CDF0A}
+		{5A613FEF-38B2-4136-B832-49B8F02BA416} = {2624272A-CEA2-41B5-945D-6A96516CDF0A}
+		{C9805A84-FD7F-4EBB-86F8-667C3FF3A9D4} = {2624272A-CEA2-41B5-945D-6A96516CDF0A}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {769BFDA7-3585-42EE-8F55-DAB92129DFE1}
+	EndGlobalSection
+EndGlobal
