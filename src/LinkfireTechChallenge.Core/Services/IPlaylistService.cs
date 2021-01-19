@@ -5,7 +5,8 @@ namespace LinkfireTechChallenge.Core.Services
 {
     public interface IPlaylistService
     {
-        Task<string> Get(string playlistId);
+        Task<Playlist> Get(string playlistId);
         Task AddTopNTracks(ArtistTopTracks artistTopTracks, string playlistId, int count);
+        Task<int> GetTotalSongsInPlaylist(string playlistId);
     }
 }

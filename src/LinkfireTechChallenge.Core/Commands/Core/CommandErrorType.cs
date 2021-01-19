@@ -1,6 +1,5 @@
 ﻿namespace LinkfireTechChallenge.Core.Commands.Core
 {
-    // keep the numeric values negative
     public enum CommandErrorType
     {
         DefaultError = -1,

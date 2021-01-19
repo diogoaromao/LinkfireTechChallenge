@@ -14,7 +14,7 @@ namespace LinkfireTechChallenge.Core.Services
             _playlistRepo = playlistRepo;
         }
 
-        public async Task<string> Get(string playlistId)
+        public async Task<Playlist> Get(string playlistId)
         {
             return await _playlistRepo.Get(playlistId);
         }
@@ -23,6 +23,11 @@ namespace LinkfireTechChallenge.Core.Services
         {
             var topTracks = artistTopTracks.Tracks.Take(count).Select(t => t.Uri);
             await _playlistRepo.AddTracks(topTracks, playlistId);
+        }
+
+        public async Task<int> GetTotalSongsInPlaylist(string playlistId)
+        {
+            return await _playlistRepo.GetTotalSongsInPlaylist(playlistId);
         }
     }
 }

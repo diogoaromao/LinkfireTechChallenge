@@ -76,7 +76,7 @@ namespace SpotifyClient
             }
         }
 
-        public async Task<string> GetPlaylist(string playlistId)
+        public async Task<PlaylistDTO> GetPlaylist(string playlistId)
         {
             HttpResponseMessage response = null;
             try
@@ -92,7 +92,38 @@ namespace SpotifyClient
                 {
                     case HttpStatusCode.OK:
                         var content = await response.Content.ReadAsStringAsync();
-                        return content;
+                        var playlist = JsonConvert.DeserializeObject<PlaylistDTO>(content);
+                        return playlist;
+                    case HttpStatusCode.NotFound:
+                        return null;
+                    default:
+                        throw new InvalidOperationException(response.ReasonPhrase);
+                }
+            }
+            finally
+            {
+                response?.Dispose();
+            }
+        }
+
+        public async Task<PlaylistTracksDTO> GetTotalSongsInPlaylist(string playlistId)
+        {
+            HttpResponseMessage response = null;
+            try
+            {
+                var requestUri = $"playlists/{playlistId}/tracks";
+
+                await ExecuteTransientCall(async () =>
+                {
+                    response = await _httpClient.SendGetAsync(requestUri);
+                });
+
+                switch (response.StatusCode)
+                {
+                    case HttpStatusCode.OK:
+                        var content = await response.Content.ReadAsStringAsync();
+                        var playlistTracks = JsonConvert.DeserializeObject<PlaylistTracksDTO>(content);
+                        return playlistTracks;
                     case HttpStatusCode.NotFound:
                         return null;
                     default:

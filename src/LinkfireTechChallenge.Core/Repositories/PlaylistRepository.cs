@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using LinkfireTechChallenge.Core.Models.Domain;
 using SpotifyClient.Core.DTO;
 using SpotifyClient.Core.Utils;
 using System.Collections.Generic;
@@ -17,15 +18,20 @@ namespace LinkfireTechChallenge.Core.Repositories
             _spotifyClient = spotifyClient;
         }
 
-        public async Task<string> Get(string playlistId)
+        public async Task<Playlist> Get(string playlistId)
         {
-            return await _spotifyClient.GetPlaylist(playlistId);
+            return _mapper.Map<PlaylistDTO, Playlist>(await _spotifyClient.GetPlaylist(playlistId));
         }
 
         public async Task AddTracks(IEnumerable<string> topTracks, string playlistId)
         {
             var tracksToAdd = _mapper.Map<IEnumerable<string>, AddTracksToPlaylistDTO>(topTracks);
             await _spotifyClient.AddTracksToPlaylist(tracksToAdd, playlistId);
+        }
+
+        public async Task<int> GetTotalSongsInPlaylist(string playlistId)
+        {
+            return (await _spotifyClient.GetTotalSongsInPlaylist(playlistId)).Total;
         }
     }
 }

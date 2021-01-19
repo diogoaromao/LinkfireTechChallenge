@@ -3,6 +3,7 @@ using LinkfireTechChallenge.Core.Utils;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 
@@ -45,19 +46,9 @@ namespace LinkfireTechChallenge.Core.Commands.Core
             return new CommandResult(HttpStatusCode.OK);
         }
 
-        public static CommandResult Ok(object content)
-        {
-            return new CommandResult(HttpStatusCode.OK, content);
-        }
-
-        public static CommandResult PreConditionFailed()
-        {
-            return new CommandResult(HttpStatusCode.PreconditionFailed);
-        }
-
         public static CommandResult FromException(Exception ex)
         {
-            return Fail(HttpStatusCode.BadRequest, new CommandError(CommandErrorType.Exception, ex, null), ex);
+            return Fail(HttpStatusCode.BadRequest, new CommandError(CommandErrorType.Exception, ex.Message, null), ex);
         }
 
         public static CommandResult BadRequest(string message)
@@ -67,7 +58,7 @@ namespace LinkfireTechChallenge.Core.Commands.Core
 
         public static CommandResult NotFound(string name, string value)
         {
-            return Fail(HttpStatusCode.NotFound, new CommandError(CommandErrorType.NotFound, "Error" /*string.Format(CultureInfo.InvariantCulture, NotificationResources.NotFound, name, value)*/, name));
+            return Fail(HttpStatusCode.NotFound, new CommandError(CommandErrorType.NotFound, string.Format(CultureInfo.InvariantCulture, "{0} with value {1} could not be found.", name, value), name));
         }
 
         public static CommandResult Fail(HttpStatusCode httpStatusCode, ICommandError error)
@@ -88,6 +79,7 @@ namespace LinkfireTechChallenge.Core.Commands.Core
         {
             return FromValidationResult(validationResult, null);
         }
+
         public static CommandResult FromValidationResult(ValidationResult validationResult, Exception exception)
         {
             Guard.NotNull(validationResult, nameof(validationResult));

@@ -71,6 +71,7 @@ namespace LinkfireTechChallenge
                 cfg.CreateMap<IEnumerable<string>, AddTracksToPlaylistDTO>()
                     .ForMember(dest => dest.Uris,
                                 opt => opt.MapFrom(src => src));
+                cfg.CreateMap<PlaylistDTO, Playlist>();
             });
             services.AddSingleton<IMapper>(c => new Mapper(autoMapperConfig));
         }
@@ -115,10 +116,10 @@ namespace LinkfireTechChallenge
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            //if (env.IsDevelopment())
+            //{
+            //    app.UseDeveloperExceptionPage();
+            //}
 
             app.UseRouting();
 
@@ -128,7 +129,7 @@ namespace LinkfireTechChallenge
             });
 
             app.UseSwagger();
-            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Notification API V1"));
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Spotify API V1"));
         }
     }
 }
