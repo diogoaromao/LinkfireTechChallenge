@@ -1,7 +1,9 @@
-﻿namespace SpotifyClient.Core.DTO
+﻿using System.Collections.Generic;
+
+namespace SpotifyClient.Core.DTO
 {
     public class AddTracksToPlaylistDTO
     {
-        public string Uris { get; set; }
+        public IEnumerable<string> Uris { get; set; }
     }
 }

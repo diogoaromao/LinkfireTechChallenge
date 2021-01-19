@@ -14,9 +14,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using SpotifyClient.Core.Config;
 using SpotifyClient.Core.DTO;
 using SpotifyClient.Core.Utils;
+using System;
 using System.Collections.Generic;
 
 namespace LinkfireTechChallenge
@@ -42,6 +45,15 @@ namespace LinkfireTechChallenge
             ConfigureEntityRepositories(services);
             ConfigureMediatR(services);
             ConfigureController(services);
+            SetupJsonProperties();
+        }
+
+        private static void SetupJsonProperties()
+        {
+            JsonConvert.DefaultSettings = () => new JsonSerializerSettings
+            {
+                ContractResolver = new CamelCasePropertyNamesContractResolver()
+            };
         }
 
         private void ConfigureEntityRepositories(IServiceCollection services)
@@ -58,7 +70,7 @@ namespace LinkfireTechChallenge
                 cfg.CreateMap<ArtistTopTracksDTO, ArtistTopTracks>();
                 cfg.CreateMap<IEnumerable<string>, AddTracksToPlaylistDTO>()
                     .ForMember(dest => dest.Uris,
-                                opt => opt.MapFrom(src => string.Join(',', src)));
+                                opt => opt.MapFrom(src => src));
             });
             services.AddSingleton<IMapper>(c => new Mapper(autoMapperConfig));
         }

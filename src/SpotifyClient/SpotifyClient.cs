@@ -6,7 +6,6 @@ using SpotifyClient.Core.DTO;
 using SpotifyClient.Core.Extensions;
 using SpotifyClient.Core.Utils;
 using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -122,7 +121,7 @@ namespace SpotifyClient
 
                 switch(response.StatusCode)
                 {
-                    case HttpStatusCode.NoContent:
+                    case HttpStatusCode.Created:
                         return;
                     default:
                         throw new InvalidOperationException(response.ReasonPhrase);
