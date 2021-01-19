@@ -1,4 +1,4 @@
-﻿namespace SpotifyClient.Core.Models
+﻿namespace LinkfireTechChallenge.Core.Models.Domain
 {
     public class Track
     {

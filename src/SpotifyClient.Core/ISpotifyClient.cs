@@ -1,5 +1,4 @@
-﻿using SpotifyClient.Core.Models;
-using System.Collections.Generic;
+﻿using SpotifyClient.Core.DTO;
 using System.Threading.Tasks;
 
 namespace SpotifyClient.Core.Utils
@@ -7,7 +6,7 @@ namespace SpotifyClient.Core.Utils
     public interface ISpotifyClient
     {
         Task<string> GetPlaylist(string playlistId);
-        Task<ArtistTopTracks> GetArtistTopTracks(string artistId);
-        Task AddTracksToPlaylist(string playlistId, IEnumerable<string> tracks);
+        Task<ArtistTopTracksDTO> GetArtistTopTracks(string artistId);
+        Task AddTracksToPlaylist(AddTracksToPlaylistDTO tracks, string playlistId);
     }
 }

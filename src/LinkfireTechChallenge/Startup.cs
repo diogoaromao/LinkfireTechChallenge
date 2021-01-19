@@ -1,20 +1,23 @@
 using Autofac;
+using AutoMapper;
 using FluentValidation;
 using LinkfireTechChallenge.Core.Behaviors;
 using LinkfireTechChallenge.Core.Commands;
+using LinkfireTechChallenge.Core.Models.Domain;
+using LinkfireTechChallenge.Core.Repositories;
 using LinkfireTechChallenge.Core.Services;
 using LinkfireTechChallenge.Core.Validators;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using SpotifyClient.Core.Config;
+using SpotifyClient.Core.DTO;
 using SpotifyClient.Core.Utils;
-using System;
+using System.Collections.Generic;
 
 namespace LinkfireTechChallenge
 {
@@ -34,9 +37,30 @@ namespace LinkfireTechChallenge
         public void ConfigureServices(IServiceCollection services)
         {
             ConfigureSwagger(services);
+            ConfigureAutoMapper(services);
             ConfigureEntityServices(services);
+            ConfigureEntityRepositories(services);
             ConfigureMediatR(services);
             ConfigureController(services);
+        }
+
+        private void ConfigureEntityRepositories(IServiceCollection services)
+        {
+            services.AddSingleton<IArtistRepository, ArtistRepository>();
+            services.AddSingleton<IPlaylistRepository, PlaylistRepository>();
+        }
+
+        private static void ConfigureAutoMapper(IServiceCollection services)
+        {
+            var autoMapperConfig = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<TrackDTO, Track>();
+                cfg.CreateMap<ArtistTopTracksDTO, ArtistTopTracks>();
+                cfg.CreateMap<IEnumerable<string>, AddTracksToPlaylistDTO>()
+                    .ForMember(dest => dest.Uris,
+                                opt => opt.MapFrom(src => string.Join(',', src)));
+            });
+            services.AddSingleton<IMapper>(c => new Mapper(autoMapperConfig));
         }
 
         private static void ConfigureSwagger(IServiceCollection services)

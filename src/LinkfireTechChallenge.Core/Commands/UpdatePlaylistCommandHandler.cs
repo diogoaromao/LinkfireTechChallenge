@@ -34,6 +34,8 @@ namespace LinkfireTechChallenge.Core.Commands
                     return CommandResult.NotFound(nameof(artistTopTracks), request.ArtistId);
                 }
 
+                await _playlistService.AddTopNTracks(artistTopTracks, request.PlaylistId, request.Count);
+
                 return CommandResult.Ok();
             }
             catch(Exception ex)

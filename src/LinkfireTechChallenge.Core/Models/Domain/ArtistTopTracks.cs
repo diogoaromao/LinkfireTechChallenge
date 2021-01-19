@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace SpotifyClient.Core.Models
+namespace LinkfireTechChallenge.Core.Models.Domain
 {
     public class ArtistTopTracks
     {

@@ -1,10 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using LinkfireTechChallenge.Core.Models.Domain;
+using System.Threading.Tasks;
 
 namespace LinkfireTechChallenge.Core.Services
 {
     public interface IPlaylistService
     {
         Task<string> Get(string playlistId);
-        Task Update(string artistId, string playlistId, int count);
+        Task AddTopNTracks(ArtistTopTracks artistTopTracks, string playlistId, int count);
     }
 }

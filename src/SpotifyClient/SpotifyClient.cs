@@ -2,14 +2,15 @@
 using Polly;
 using Spotify.Client.Core.Utils;
 using SpotifyClient.Core.Config;
+using SpotifyClient.Core.DTO;
 using SpotifyClient.Core.Extensions;
-using SpotifyClient.Core.Models;
 using SpotifyClient.Core.Utils;
 using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace SpotifyClient
@@ -46,7 +47,7 @@ namespace SpotifyClient
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(Bearer, spotifyClientConfig.AccessToken);
         }
 
-        public async Task<ArtistTopTracks> GetArtistTopTracks(string artistId)
+        public async Task<ArtistTopTracksDTO> GetArtistTopTracks(string artistId)
         {
             HttpResponseMessage response = null;
             try
@@ -62,7 +63,7 @@ namespace SpotifyClient
                 {
                     case HttpStatusCode.OK:
                         var content = await response.Content.ReadAsStringAsync();
-                        var tracks = JsonConvert.DeserializeObject<ArtistTopTracks>(content);
+                        var tracks = JsonConvert.DeserializeObject<ArtistTopTracksDTO>(content);
                         return tracks;
                     case HttpStatusCode.NotFound:
                         return null;
@@ -105,9 +106,33 @@ namespace SpotifyClient
             }
         }
 
-        public async Task AddTracksToPlaylist(string playlistId, IEnumerable<string> tracks)
+        public async Task AddTracksToPlaylist(AddTracksToPlaylistDTO tracks, string playlistId)
         {
+            StringContent content = null;
+            HttpResponseMessage response = null;
+            try
+            {
+                var requestUri = $"playlists/{playlistId}/tracks";
+                content = new StringContent(JsonConvert.SerializeObject(tracks), Encoding.UTF8, MediaType);
 
+                await ExecuteTransientCall(async () =>
+                {
+                    response = await _httpClient.SendPostAsync(requestUri, content);
+                });
+
+                switch(response.StatusCode)
+                {
+                    case HttpStatusCode.NoContent:
+                        return;
+                    default:
+                        throw new InvalidOperationException(response.ReasonPhrase);
+                }
+            }
+            finally
+            {
+                content?.Dispose();
+                response?.Dispose();
+            }
         }
 
         private T ExecuteTransientCall<T>(Func<T> func)

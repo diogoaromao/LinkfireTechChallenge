@@ -1,9 +1,9 @@
 ﻿using LinkfireTechChallenge.Core.Models.Domain;
 using System.Threading.Tasks;
 
-namespace LinkfireTechChallenge.Core.Services
+namespace LinkfireTechChallenge.Core.Repositories
 {
-    public interface IArtistService
+    public interface IArtistRepository
     {
         Task<ArtistTopTracks> GetTopTracks(string artistId);
     }

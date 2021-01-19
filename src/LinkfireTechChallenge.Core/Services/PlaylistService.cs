@@ -1,26 +1,28 @@
-﻿using SpotifyClient.Core.Utils;
+﻿using LinkfireTechChallenge.Core.Models.Domain;
+using LinkfireTechChallenge.Core.Repositories;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace LinkfireTechChallenge.Core.Services
 {
     public class PlaylistService : IPlaylistService
     {
-        private readonly ISpotifyClient _spotifyClient;
+        private readonly IPlaylistRepository _playlistRepo;
 
-        public PlaylistService(ISpotifyClient spotifyClient)
+        public PlaylistService(IPlaylistRepository playlistRepo)
         {
-            _spotifyClient = spotifyClient;
+            _playlistRepo = playlistRepo;
         }
 
         public async Task<string> Get(string playlistId)
         {
-            return await _spotifyClient.GetPlaylist(playlistId);
+            return await _playlistRepo.Get(playlistId);
         }
 
-        public async Task Update(string artistId, string playlistId, int count)
+        public async Task AddTopNTracks(ArtistTopTracks artistTopTracks, string playlistId, int count)
         {
-            var playlist = await _spotifyClient.GetPlaylist(playlistId);
-            
+            var topTracks = artistTopTracks.Tracks.Take(count).Select(t => t.Uri);
+            await _playlistRepo.AddTracks(topTracks, playlistId);
         }
     }
 }
