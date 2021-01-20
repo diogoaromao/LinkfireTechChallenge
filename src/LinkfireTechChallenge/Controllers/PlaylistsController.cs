@@ -16,10 +16,10 @@ namespace LinkfireTechChallenge.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost("AddTopNTracks/{artistId}/{playlistId}/{count}")]
-        public async Task<IActionResult> AddTopNTracks(string artistId, string playlistId, int count)
+        [HttpPost("AddTopNTracks/{artistId}/{playlistId}/{n}")]
+        public async Task<IActionResult> AddTopNTracks(string artistId, string playlistId, int n)
         {
-            return await _mediator.Send(new UpdatePlaylistCommand(artistId, playlistId, count));
+            return await _mediator.Send(new UpdatePlaylistCommand(artistId, playlistId, n));
         }
     }
 }
