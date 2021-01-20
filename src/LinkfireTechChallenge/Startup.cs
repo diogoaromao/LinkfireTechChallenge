@@ -19,7 +19,6 @@ using Newtonsoft.Json.Serialization;
 using SpotifyClient.Core.Config;
 using SpotifyClient.Core.DTO;
 using SpotifyClient.Core.Utils;
-using System;
 using System.Collections.Generic;
 
 namespace LinkfireTechChallenge
