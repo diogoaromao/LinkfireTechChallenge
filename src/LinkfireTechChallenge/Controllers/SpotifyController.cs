@@ -76,8 +76,8 @@ namespace LinkfireTechChallenge.Controllers
 
     class SpotifyAuthentication
     {
-        public string clientID = "";
-        public string clientSecret = "";
+        public string clientID = ""; // ideally, this would be stored on Azure KV
+        public string clientSecret = ""; // ideally, this would be stored on Azure KV
         public string redirectURL = "http://localhost:61297/callback";
     }
 }

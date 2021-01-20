@@ -10,6 +10,7 @@ using NUnit.Framework;
 using SpotifyClient.Core.Config;
 using SpotifyClient.Core.DTO;
 using SpotifyClient.Core.Utils;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -74,6 +75,17 @@ namespace LinkfireTechChallenge.IntegrationTests
         {
             using var reader = new StreamReader(Directory.GetCurrentDirectory() + "/appSettings.json");
             settings = JsonConvert.DeserializeObject<AppSettings>(reader.ReadToEnd());
+        }
+
+        [TestCase("endpoint", "")]
+        [TestCase("", "accessToken")]
+        public void CreateSpotifyClient_InvalidArguments_ThrowsException(string endpoint, string accessToken)
+        {
+            // Act
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                spotifyClient = new SpotifyClient.SpotifyClient(new SpotifyClientConfig(endpoint, accessToken));
+            });
         }
 
         [TestCase("artistId", "2V2kViZ3xY2oEUW6nSMSMn", 1)]

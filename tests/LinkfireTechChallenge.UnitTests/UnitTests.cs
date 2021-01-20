@@ -18,13 +18,10 @@ namespace LinkfireTechChallenge.UnitTests
 
         }
 
-        [TestCase("", "", 0)]
-        [TestCase("artist", "", 0)]
-        [TestCase("", "playlist", 0)]
-        [TestCase("", "", 1)]
+        [TestCase("", "playlist", 1)]
         [TestCase("artist", "", 1)]
         [TestCase("artist", "playlist", 0)]
-        [TestCase("", "playlist", 1)]
+        [TestCase("artist", "playlist", 101)]
         public async Task AddTracksToPlaylistInvalidArguments_ReturnsError(string artistId, string playlistId, int count)
         {
             // Act
