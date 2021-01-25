@@ -31,7 +31,10 @@ namespace LinkfireTechChallenge.Core.Repositories
 
         public async Task<int> GetTotalSongsInPlaylist(string playlistId)
         {
-            return (await _spotifyClient.GetTotalSongsInPlaylist(playlistId)).Total;
+            var playlistTracks = await _spotifyClient.GetTotalSongsInPlaylist(playlistId);
+            return playlistTracks == null ?
+                0 :
+                playlistTracks.Total;
         }
     }
 }

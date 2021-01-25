@@ -4,6 +4,7 @@ using FluentValidation;
 using LinkfireTechChallenge.Core.Behaviors;
 using LinkfireTechChallenge.Core.Commands;
 using LinkfireTechChallenge.Core.Models.Domain;
+using LinkfireTechChallenge.Core.Queries;
 using LinkfireTechChallenge.Core.Repositories;
 using LinkfireTechChallenge.Core.Services;
 using LinkfireTechChallenge.Core.Validators;
@@ -19,6 +20,7 @@ using Newtonsoft.Json.Serialization;
 using SpotifyClient.Core.Config;
 using SpotifyClient.Core.DTO;
 using SpotifyClient.Core.Utils;
+using System;
 using System.Collections.Generic;
 
 namespace LinkfireTechChallenge
@@ -40,11 +42,17 @@ namespace LinkfireTechChallenge
         {
             ConfigureSwagger(services);
             ConfigureAutoMapper(services);
+            ConfigureQueries(services);
             ConfigureEntityServices(services);
             ConfigureEntityRepositories(services);
             ConfigureMediatR(services);
             ConfigureController(services);
             SetupJsonProperties();
+        }
+
+        private static void ConfigureQueries(IServiceCollection services)
+        {
+            services.AddSingleton<IPlaylistQueries, PlaylistQueries>();
         }
 
         private static void SetupJsonProperties()
